@@ -16,8 +16,6 @@ By integrating Python with the Selenium framework, this project executes a serie
 
 **Search Functionality:** Assesses search operations, including the handling of non-existent products and product sorting.
 
-**Prerequisites**
-
  - Language Used: I used Python for the described project. Python is often chosen for automated testing projects due to its clear and concise syntax, and a vast community that provides numerous helpful libraries and frameworks.
 
  - IDE Used: PyCharm is the IDE mentioned and used for developing and managing the project. PyCharm is a popular IDE for Python development, offering extensive support for Python, integration with various version control systems, web development tools, and support for test-driven development, making it ideal for projects involving Selenium and Behave.
