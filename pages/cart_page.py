@@ -23,9 +23,15 @@ class CartPage(BasePage):
         """Clicks the 'Add to Cart' button on the product details page."""
         self.find(self.ADD_TO_CART_BUTTON).click()
 
-    def verify_success_message(self):
+    def verify_success_message(self, expected_message):
         """Verifies that the success message for adding an item to the cart is displayed."""
-        return self.get_text(self.CART_SUCCESS_MESSAGE)
+        try:
+            success_message = self.get_text(self.CART_SUCCESS_MESSAGE)
+            messages = [expected_message]
+            for message in messages:
+                assert message in success_message, f"Expected '{message}', but got '{success_message}'"
+        except Exception as e:
+            raise AssertionError(f"Success message not found: {str(e)}")
 
     def navigate_to_shopping_cart_from_message(self):
         """Navigates to the shopping cart page via the hyperlink in the success message."""
@@ -35,14 +41,15 @@ class CartPage(BasePage):
         """Clicks on the 'Remove Item' button in the shopping cart to remove the item."""
         self.find(self.REMOVE_ITEM_BUTTON).click()
 
-    def verify_empty_cart_message(self):
+    def verify_empty_cart_message(self, expected_message):
         """Verifies that the message indicating the shopping cart is empty is displayed."""
-        return self.get_text(self.EMPTY_CART_MESSAGE)
+        empty_message = self.get_text(self.EMPTY_CART_MESSAGE)
+        assert expected_message in empty_message, f"Expected '{expected_message}', but got '{empty_message}'"
 
     def is_redirected_to_item_page(self):
         """Verifies that the browser is redirected to the item page by checking for the 'Add to Cart' button."""
-        return self.is_element_present(self.ADD_TO_CART_BUTTON)
+        assert self.is_element_present(self.ADD_TO_CART_BUTTON), "Not redirected to the item page"
 
     def is_redirected_to_cart_page(self):
         """Verifies that the browser is redirected to the shopping cart page by checking for the 'Remove Item' button."""
-        return self.is_element_present(self.REMOVE_ITEM_BUTTON)
+        assert self.is_element_present(self.REMOVE_ITEM_BUTTON), "Not redirected to the shopping cart page"

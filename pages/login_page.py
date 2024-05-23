@@ -25,10 +25,14 @@ class LoginPage(BasePage):
         """Click the login button to submit the credentials."""
         self.find(self.BUTTON_LOGIN).click()
 
-    def is_main_error_message_displayed(self):
-        """Check if the main error message is displayed on the page."""
-        return self.find(self.ERROR_MESSAGE).is_displayed()
+    def verify_url(self, expected_url):
+        """Verify that the URL of the page is correct."""
+        assert self.driver.current_url == expected_url, "Login page URL is incorrect"
 
-    def main_error_message_contains_text(self, text):
-        """Check if the main error message contains specific text."""
-        return text in self.get_text(self.ERROR_MESSAGE)
+    def verify_main_error_message(self, expected_error):
+        """Verify that the main error message is displayed and contains the expected text."""
+        assert self.is_element_present(self.ERROR_MESSAGE), "Error message not displayed"
+        actual_error = self.get_text(self.ERROR_MESSAGE)
+        errors = [expected_error]
+        for error in errors:
+            assert error in actual_error, f"Error message does not contain the expected text: {error}"

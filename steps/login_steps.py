@@ -6,7 +6,7 @@ def step_impl(context):
 
 @then('The URL of the page is "{url}"')
 def step_impl(context, url):
-    assert context.login_page.driver.current_url == url, "Login page URL is incorrect"
+    context.login_page.verify_url(url)
 
 @when('I enter "{email}" in the email input')
 def step_impl(context, email):
@@ -22,5 +22,4 @@ def step_impl(context):
 
 @then('I should see "{expected_error}" message')
 def step_impl(context, expected_error):
-    assert context.login_page.is_main_error_message_displayed(), "Error message not displayed"
-    assert context.login_page.main_error_message_contains_text(expected_error), f"Error message does not contain the expected text: {expected_error}"
+    context.login_page.verify_main_error_message(expected_error)

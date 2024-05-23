@@ -35,13 +35,12 @@ def step_impl(context):
 
 @then('Success message is displayed')
 def step_impl(context):
-    assert context.register_page.is_success_message_displayed(), "Success message was not displayed"
+    context.register_page.verify_success_message()
 
-@then('The success message is "Thank you for registering with Main Website Store."')
-def step_impl(context):
-    success_text = context.register_page.get_success_message_text()
-    assert success_text == "Thank you for registering with Main Website Store.", f"Expected success message not found. Found: {success_text}"
+@then('The success message is "{expected_message}"')
+def step_impl(context, expected_message):
+    context.register_page.verify_success_message(expected_message)
 
 @then('The URL of the register page is "https://magento.softwaretestingboard.com/customer/account/create/"')
 def step_impl(context):
-    assert context.register_page.driver.current_url == "https://magento.softwaretestingboard.com/customer/account/create/", "URL is not correct"
+    context.register_page.verify_url("https://magento.softwaretestingboard.com/customer/account/create/")

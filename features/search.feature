@@ -24,3 +24,14 @@ Feature: Homepage Search Functionality
     Then I should see the products sorted from high to low prices on the page
     When I click on the button to set the order to ascending
     Then I should see the products sorted from low to high prices on the page
+
+  @search @regression
+  Scenario: Add two products to compare list
+    When I click on the product "Radiant Tee"
+    And I am redirected to the product details page
+    And I click the "Add to Compare" button
+    When I click on the product "Diva Gym Tee"
+    And I am redirected to the product details page
+    And I click the "Add to Compare" button
+    When I click on the "Compare Products" button
+    Then I should be taken to the compare products page

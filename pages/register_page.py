@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-
 import time  # Utilizat pentru a genera un timestamp
 
 class RegisterPage(BasePage):
@@ -49,18 +48,14 @@ class RegisterPage(BasePage):
         unique_email = f"test_{timestamp}@example.com"
         self.set_email(unique_email)
 
-    def is_success_message_displayed(self):
-        """Check if the registration success message is displayed."""
-        return self.find(self.REGISTER_SUCCESS_MESSAGE).is_displayed()
+    def verify_success_message(self, expected_message=None):
+        """Verify that the registration success message is displayed and contains the expected text."""
+        assert self.is_element_present(self.REGISTER_SUCCESS_MESSAGE), "Success message was not displayed"
+        success_text = self.get_text(self.REGISTER_SUCCESS_MESSAGE)
+        messages = [expected_message] if expected_message else ["Thank you for registering with Main Website Store."]
+        for message in messages:
+            assert message in success_text, f"Expected '{message}', but got '{success_text}'"
 
-    def get_success_message_text(self):
-        """Get the text of the success message."""
-        return self.get_text(self.REGISTER_SUCCESS_MESSAGE)
-
-    def is_error_message_displayed(self):
-        """Check if any error message is displayed."""
-        return self.find(self.ERROR_MESSAGE_GENERAL).is_displayed()
-
-    def get_error_message_text(self):
-        """Get the text of the general error message."""
-        return self.get_text(self.ERROR_MESSAGE_GENERAL)
+    def verify_url(self, expected_url):
+        """Verify that the URL of the register page is correct."""
+        assert self.driver.current_url == expected_url, "URL is not correct"
