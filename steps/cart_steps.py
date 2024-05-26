@@ -1,12 +1,16 @@
 from behave import given, when, then
 
-@given('I am on the home page "https://magento.softwaretestingboard.com/"')
+@given('I am on the home page')
 def step_impl(context):
     context.cart_page.navigate_to_home_page()
 
 @when('I click on the product "Fusion Backpack"')
 def step_impl(context):
-    context.cart_page.click_on_product()
+    context.cart_page.click_on_fusion_backpack()
+
+@when('I click on the product "Hero Hoodie"')
+def step_impl(context):
+    context.cart_page.click_on_hero_hoodie()
 
 @when('I am redirected to the item page')
 def step_impl(context):
@@ -35,3 +39,11 @@ def step_impl(context):
 @then('the message "{expected_message}" should be displayed')
 def step_impl(context, expected_message):
     context.cart_page.verify_empty_cart_message(expected_message)
+
+@when('I select the size "M"')
+def step_impl(context):
+    context.cart_page.select_size()
+
+@when('I select the color "Green"')
+def step_impl(context):
+    context.cart_page.select_color()

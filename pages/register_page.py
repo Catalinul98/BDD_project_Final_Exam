@@ -3,7 +3,6 @@ from pages.base_page import BasePage
 import time  # Utilizat pentru a genera un timestamp
 
 class RegisterPage(BasePage):
-
     REGISTER_PAGE_URL = "https://magento.softwaretestingboard.com/customer/account/create/"
     INPUT_FIRST_NAME = (By.ID, "firstname")
     INPUT_LAST_NAME = (By.ID, "lastname")
@@ -45,8 +44,9 @@ class RegisterPage(BasePage):
     def generate_unique_email(self):
         """Generate a unique email address."""
         timestamp = int(time.time())
-        unique_email = f"test_{timestamp}@example.com"
-        self.set_email(unique_email)
+        self.unique_email = f"test_{timestamp}@example.com"
+        self.set_email(self.unique_email)
+        return self.unique_email
 
     def verify_success_message(self, expected_message=None):
         """Verify that the registration success message is displayed and contains the expected text."""
@@ -54,8 +54,11 @@ class RegisterPage(BasePage):
         success_text = self.get_text(self.REGISTER_SUCCESS_MESSAGE)
         messages = [expected_message] if expected_message else ["Thank you for registering with Main Website Store."]
         for message in messages:
-            assert message in success_text, f"Expected '{message}', but got '{success_text}'"
+            if message not in success_text:
+                raise AssertionError(f"Expected '{message}', but got '{success_text}'")
 
-    def verify_url(self, expected_url):
+    def verify_url(self, expected_url=None):
         """Verify that the URL of the register page is correct."""
-        assert self.driver.current_url == expected_url, "URL is not correct"
+        expected_url = expected_url or self.REGISTER_PAGE_URL
+        if self.driver.current_url != expected_url:
+            raise AssertionError(f"URL is not correct. Expected {expected_url} but got {self.driver.current_url}")

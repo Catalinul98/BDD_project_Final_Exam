@@ -3,12 +3,10 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
-
 from browser import Browser
 
 class BasePage(Browser):
 
-    # Element identifiers updated for Magento
     INPUT_SEARCH = (By.ID, "search")
     BUTTON_SEARCH = (By.CSS_SELECTOR, "button[title='Search']")
 
@@ -66,3 +64,8 @@ class BasePage(Browser):
     def click_search_button(self):
         """Click the search button."""
         self.find(self.BUTTON_SEARCH).click()
+
+    def verify_elements_present(self, locators):
+        """Check if multiple elements are present on the page."""
+        for locator in locators:
+            assert self.is_element_present(locator), f"Element {locator} not present"

@@ -5,7 +5,7 @@ Feature: Login Page
 
   @regression @sanity
   Scenario: Check that the URL is correct
-    Then The URL of the page is "https://magento.softwaretestingboard.com/customer/account/login"
+    Then The URL of the login page is correct
 
   @regression @smoke
   Scenario Outline: Log in with unregistered email

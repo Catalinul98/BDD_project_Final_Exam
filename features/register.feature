@@ -6,7 +6,7 @@ Feature: Registration page
 
   @regression @sanity
   Scenario: Check that the URL is correct
-    Then The URL of the register page is "https://magento.softwaretestingboard.com/customer/account/create/"
+    Then The URL of the register page is correct
 
   @regression @smoke
   Scenario: Register new account with valid data

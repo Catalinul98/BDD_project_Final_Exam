@@ -22,7 +22,7 @@ def step_impl(context):
 
 @when('I select "Price" from the sort options')
 def step_impl(context):
-    context.search_page.select_sort_option("Price")
+    context.search_page.select_sort_option()
 
 @then('I should see the products sorted from high to low prices on the page')
 def step_impl(context):

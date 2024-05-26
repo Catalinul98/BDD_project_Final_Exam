@@ -1,7 +1,7 @@
 Feature: Homepage Search Functionality
 
   Background:
-    Given I am on the home page "https://magento.softwaretestingboard.com/"
+    Given I am on the home page
 
   @search @smoke
   Scenario: Successful product search

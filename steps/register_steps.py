@@ -1,5 +1,4 @@
 from behave import given, when, then
-import time
 
 @given('I am on the register page')
 def step_impl(context):
@@ -7,7 +6,7 @@ def step_impl(context):
 
 @given('I generate a unique email')
 def step_impl(context):
-    context.unique_email = f"user_{int(time.time())}@example.com"
+    context.unique_email = context.register_page.generate_unique_email()
 
 @when('I enter "TestFirstName" in the first name input')
 def step_impl(context):
@@ -41,6 +40,6 @@ def step_impl(context):
 def step_impl(context, expected_message):
     context.register_page.verify_success_message(expected_message)
 
-@then('The URL of the register page is "https://magento.softwaretestingboard.com/customer/account/create/"')
+@then('The URL of the register page is correct')
 def step_impl(context):
-    context.register_page.verify_url("https://magento.softwaretestingboard.com/customer/account/create/")
+    context.register_page.verify_url()

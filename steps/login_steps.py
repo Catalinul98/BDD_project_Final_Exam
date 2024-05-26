@@ -4,9 +4,9 @@ from behave import *
 def step_impl(context):
     context.login_page.open()
 
-@then('The URL of the page is "{url}"')
-def step_impl(context, url):
-    context.login_page.verify_url(url)
+@then('The URL of the login page is correct')
+def step_impl(context):
+    context.login_page.verify_url(context.login_page.LOGIN_PAGE_URL)
 
 @when('I enter "{email}" in the email input')
 def step_impl(context, email):

@@ -5,6 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 from pages.base_page import BasePage
 
 class SearchPage(BasePage):
+    SORT_BY_PRICE = "Price"
     INPUT_SEARCH = (By.ID, "search")
     BUTTON_SEARCH = (By.CSS_SELECTOR, "button.action.search")
     PRODUCTS_CONTAINER = (By.CSS_SELECTOR, "div.products-grid")
@@ -14,7 +15,7 @@ class SearchPage(BasePage):
     SORTED_PRICES = (By.CSS_SELECTOR, "span.price")
     ADD_TO_COMPARE_BUTTON = (By.CSS_SELECTOR, "a.action.tocompare")
     COMPARE_PRODUCTS_BUTTON = (By.CSS_SELECTOR, "a.action.compare")
-    COMPARE_PRODUCTS_TITLE = (By.CSS_SELECTOR, "div.page-title-wrapper span.base")  # Updated selector
+    COMPARE_PRODUCTS_TITLE = (By.CSS_SELECTOR, "div.page-title-wrapper span.base")
 
     def navigate_to_home_page(self):
         self.driver.get("https://magento.softwaretestingboard.com/")
@@ -42,11 +43,11 @@ class SearchPage(BasePage):
                 return True
         assert False, f"No results related to {item} found"
 
-    def select_sort_option(self, option_text):
+    def select_sort_option(self):
         sort_dropdown = Select(WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.SORT_DROPDOWN)
         ))
-        sort_dropdown.select_by_visible_text(option_text)
+        sort_dropdown.select_by_visible_text(self.SORT_BY_PRICE)
 
     def verify_no_products_displayed(self):
         try:
