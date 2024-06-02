@@ -32,10 +32,6 @@ def step_impl(context):
 def step_impl(context):
     context.register_page.click_register_button()
 
-@then('Success message is displayed')
-def step_impl(context):
-    context.register_page.verify_success_message()
-
 @then('The success message is "{expected_message}"')
 def step_impl(context, expected_message):
     context.register_page.verify_success_message(expected_message)

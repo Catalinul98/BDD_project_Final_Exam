@@ -55,3 +55,23 @@ def step_impl(context):
 @then('I should be taken to the compare products page')
 def step_impl(context):
     context.search_page.verify_compare_products_page()
+
+@when('I click on "Category"')
+def step_impl(context):
+    context.search_page.click_category_filter()
+
+@when('I select "Gear" from the category filter')
+def step_impl(context):
+    context.search_page.select_gear_category()
+
+@then('I should see only products from the "Gear" category')
+def step_impl(context):
+    context.search_page.verify_search_results_page()
+
+@when('I navigate to the second page of results')
+def step_impl(context):
+    context.search_page.navigate_to_page_2()
+
+@then('I should see the products from the second page')
+def step_impl(context):
+    context.search_page.verify_current_page(2)

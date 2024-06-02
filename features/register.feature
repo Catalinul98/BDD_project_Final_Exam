@@ -16,5 +16,4 @@ Feature: Registration page
     And I enter "Password123" in the new password input
     And I enter "Password123" in the password confirm input
     And I click the create account button
-    Then Success message is displayed
-    And The success message is "Thank you for registering with Main Website Store."
+    Then The success message is "Thank you for registering with Main Website Store."
