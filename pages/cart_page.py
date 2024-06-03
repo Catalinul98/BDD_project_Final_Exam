@@ -30,8 +30,6 @@ class CartPage(BasePage):
         self.find(self.ADD_TO_CART_BUTTON).click()
 
     def verify_success_message(self, expected_message):
-        """Verifies that the success message for adding an item to the cart is displayed.
-        Raises an AssertionError if the expected message is not present."""
         success_message = self.get_text(self.CART_SUCCESS_MESSAGE)
         assert expected_message in success_message, f"Expected '{expected_message}', but got '{success_message}'"
 
